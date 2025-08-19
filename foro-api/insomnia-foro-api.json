@@ -1,0 +1,116 @@
+{
+  "_type": "export",
+  "__export_format": 4,
+  "__export_date": "2025-08-18T00:00:00.000Z",
+  "__export_source": "chatgpt-foro-api",
+  "resources": [
+    {
+      "_id": "wrk_foroproject",
+      "_type": "workspace",
+      "name": "Foro API",
+      "description": "Colección de requests para Foro API"
+    },
+    {
+      "_id": "env_base",
+      "_type": "environment",
+      "parentId": "wrk_foroproject",
+      "name": "Base Environment",
+      "data": {
+        "baseUrl": "http://localhost:8080",
+        "token": ""
+      }
+    },
+    {
+      "_id": "fld_auth",
+      "_type": "request_group",
+      "parentId": "wrk_foroproject",
+      "name": "Auth"
+    },
+    {
+      "_id": "req_register",
+      "_type": "request",
+      "parentId": "fld_auth",
+      "name": "POST /auth/register",
+      "method": "POST",
+      "url": "{{ _.baseUrl }}/auth/register",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\"nombre\": \"Demo\", \"email\": \"nuevo@foro.com\", \"password\": \"demo123\"}"
+      }
+    },
+    {
+      "_id": "req_login",
+      "_type": "request",
+      "parentId": "fld_auth",
+      "name": "POST /auth/login",
+      "method": "POST",
+      "url": "{{ _.baseUrl }}/auth/login",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\"email\": \"demo@foro.com\", \"password\": \"demo123\"}"
+      }
+    },
+    {
+      "_id": "fld_topicos",
+      "_type": "request_group",
+      "parentId": "wrk_foroproject",
+      "name": "Topicos"
+    },
+    {
+      "_id": "req_listar",
+      "_type": "request",
+      "parentId": "fld_topicos",
+      "name": "GET /topicos (paginado)",
+      "method": "GET",
+      "url": "{{ _.baseUrl }}/topicos?size=5&page=0&sort=id,desc",
+      "authentication": {
+        "type": "bearer",
+        "token": "{{ _.token }}"
+      }
+    },
+    {
+      "_id": "req_crear",
+      "_type": "request",
+      "parentId": "fld_topicos",
+      "name": "POST /topicos",
+      "method": "POST",
+      "url": "{{ _.baseUrl }}/topicos",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\"titulo\": \"Error en Spring Boot\", \"mensaje\": \"No me compila el proyecto\", \"curso\": \"Java Backend\", \"usuarioId\": 1}"
+      },
+      "authentication": {
+        "type": "bearer",
+        "token": "{{ _.token }}"
+      }
+    },
+    {
+      "_id": "req_eliminar",
+      "_type": "request",
+      "parentId": "fld_topicos",
+      "name": "DELETE /topicos/{id}",
+      "method": "DELETE",
+      "url": "{{ _.baseUrl }}/topicos/1",
+      "authentication": {
+        "type": "bearer",
+        "token": "{{ _.token }}"
+      }
+    },
+    {
+      "_id": "req_actualizar",
+      "_type": "request",
+      "parentId": "fld_topicos",
+      "name": "PUT /topicos/{id}",
+      "method": "PUT",
+      "url": "{{ _.baseUrl }}/topicos/1",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\"titulo\": \"Titulo actualizado\", \"mensaje\": \"Mensaje actualizado\", \"curso\": \"Java Avanzado\"}"
+      },
+      "authentication": {
+        "type": "bearer",
+        "token": "{{ _.token }}"
+      }
+    }
+  ]
+}
